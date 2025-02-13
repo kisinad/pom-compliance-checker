@@ -1,0 +1,62 @@
+name: Check POM Version Compliance
+
+on:
+  push:
+    branches-ignore:
+      - main  # Exclude main branch
+  pull_request:
+    branches-ignore:
+      - main  # Exclude PRs targeting main
+
+jobs:
+  check-pom-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main_branch
+
+      - name: Checkout feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          path: feature_branch
+
+      - name: Extract version from main branch
+        id: main_version
+        run: |
+          MAIN_VERSION=$(xmllint --xpath "/*[local-name()='project']/*[local-name()='version']/text()" main_branch/pom.xml)
+          echo "MAIN_VERSION=$MAIN_VERSION" >> $GITHUB_ENV
+
+      - name: Extract version from feature branch
+        id: feature_version
+        run: |
+          FEATURE_VERSION=$(xmllint --xpath "/*[local-name()='project']/*[local-name()='version']/text()" feature_branch/pom.xml)
+          echo "FEATURE_VERSION=$FEATURE_VERSION" >> $GITHUB_ENV
+
+      - name: Compare versioning rules
+        run: |
+          echo "Main Branch Version: $MAIN_VERSION"
+          echo "Feature Branch Version: $FEATURE_VERSION"
+
+          IFS=. read -r MAIN_X MAIN_Y MAIN_Z <<< "$MAIN_VERSION"
+          IFS=. read -r FEATURE_X FEATURE_Y FEATURE_Z <<< "$FEATURE_VERSION"
+
+          if [ "$FEATURE_X" -lt "$MAIN_X" ]; then
+            echo "❌ Major version (X) cannot decrease! ($FEATURE_X < $MAIN_X)"
+            exit 1
+          fi
+
+          if [ "$FEATURE_Y" -lt "$MAIN_Y" ]; then
+            echo "❌ Feature version (Y) cannot decrease! ($FEATURE_Y < $MAIN_Y)"
+            exit 1
+          fi
+
+          if [ "$FEATURE_Y" -eq "$MAIN_Y" ] && [ "$FEATURE_Z" -lt "$MAIN_Z" ]; then
+            echo "❌ Hotfix version (Z) cannot decrease! ($FEATURE_Z < $MAIN_Z)"
+            exit 1
+          fi
+
+          echo "✅ Versioning is correct!"
