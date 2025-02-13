@@ -12,9 +12,6 @@ jobs:
   check-pom-version:
     runs-on: ubuntu-latest
     steps:
-      - name: Install XML Tools
-        run: sudo apt-get update && sudo apt-get install -y libxml2-utils
-
       - name: Checkout main branch
         uses: actions/checkout@v4
         with:
@@ -27,16 +24,16 @@ jobs:
           ref: ${{ github.ref_name }}
           path: feature_branch
 
-      - name: Extract version from main branch
+      - name: Extract version from main branch using Maven
         id: main_version
         run: |
-          MAIN_VERSION=$(xmllint --xpath "/*[local-name()='project']/*[local-name()='version']/text()" main_branch/pom.xml)
+          MAIN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           echo "MAIN_VERSION=$MAIN_VERSION" >> $GITHUB_ENV
 
-      - name: Extract version from feature branch
+      - name: Extract version from feature branch using Maven
         id: feature_version
         run: |
-          FEATURE_VERSION=$(xmllint --xpath "/*[local-name()='project']/*[local-name()='version']/text()" feature_branch/pom.xml)
+          FEATURE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           echo "FEATURE_VERSION=$FEATURE_VERSION" >> $GITHUB_ENV
 
       - name: Compare versioning rules
