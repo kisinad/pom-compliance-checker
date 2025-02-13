@@ -43,23 +43,30 @@ jobs:
         run: |
           echo "Main Branch Version: $MAIN_VERSION"
           echo "Feature Branch Version: $FEATURE_VERSION"
-
+          
           IFS=. read -r MAIN_X MAIN_Y MAIN_Z <<< "$MAIN_VERSION"
           IFS=. read -r FEATURE_X FEATURE_Y FEATURE_Z <<< "$FEATURE_VERSION"
-
+          
+          # Ensure the main version does not decrease
           if [ "$FEATURE_X" -lt "$MAIN_X" ]; then
             echo "❌ Major version (X) cannot decrease! ($FEATURE_X < $MAIN_X)"
             exit 1
           fi
-
+          
           if [ "$FEATURE_Y" -lt "$MAIN_Y" ]; then
             echo "❌ Feature version (Y) cannot decrease! ($FEATURE_Y < $MAIN_Y)"
             exit 1
           fi
-
+          
           if [ "$FEATURE_Y" -eq "$MAIN_Y" ] && [ "$FEATURE_Z" -lt "$MAIN_Z" ]; then
             echo "❌ Hotfix version (Z) cannot decrease! ($FEATURE_Z < $MAIN_Z)"
             exit 1
           fi
-
+          
+          # Check if at least one version component (X, Y, Z) has increased
+          if [ "$FEATURE_X" -eq "$MAIN_X" ] && [ "$FEATURE_Y" -eq "$MAIN_Y" ] && [ "$FEATURE_Z" -eq "$MAIN_Z" ]; then
+            echo "❌ No version component (X, Y, Z) has increased!"
+            exit 1
+          fi
+          
           echo "✅ Versioning is correct!"
