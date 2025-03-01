@@ -77,7 +77,7 @@ jobs:
       uses: github/codeql-action/init@v3
       with:
         languages: ${{ matrix.language }}
-        build-mode: manual
+        build-mode: autobuild
         # build-mode: ${{ matrix.build-mode }}
         # If you wish to specify custom queries, you can do so here or in a config file.
         # By default, queries listed here will override any specified in a config file.
@@ -92,13 +92,13 @@ jobs:
     # to build your code.
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
-    - if: matrix.build-mode == 'manual'
-      shell: bash
-      run: |
-        # Replace these with your actual build commands for Java/Kotlin
-        # ./gradlew build   # If using Gradle
-        # OR
-        mvn compile       # If using Maven
+    # - if: matrix.build-mode == 'manual'
+    #   shell: bash
+    #   run: |
+    #     # Replace these with your actual build commands for Java/Kotlin
+    #     # ./gradlew build   # If using Gradle
+    #     # OR
+    #     mvn compile       # If using Maven
 
     - name: List directory contents
       run: ls -la
