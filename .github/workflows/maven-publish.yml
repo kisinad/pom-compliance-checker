@@ -68,8 +68,11 @@ jobs:
       with:
         name: maven-build-artifacts
 
+    - name: List
+      run: ls -la
+
     - name: Unzip Target Directory
-      run: zip target.zip
+      run: unzip target.zip
 
     - name: List
       run: ls -la
