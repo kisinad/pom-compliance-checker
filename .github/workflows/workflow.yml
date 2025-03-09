@@ -33,7 +33,7 @@ jobs:
       - name: Build
         run: mvn -B clean package -DskipTests
       - name: Run UnitTest and Verify
-        run: mvn -B verify -DexcludedGroups="Smoke | Staging | BrowserStack | LamdaTest"
+        run: mvn -B verify
       - name: Generate JaCoCo Badge
         id: jacoco
         uses: cicirello/jacoco-badge-generator@v2
@@ -55,14 +55,6 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/composite@v1
         with:
           files: target/surefire-reports/*.xml
-      - name: Katalon Report Uploader
-        uses: katalon-studio/report-uploader@v0.0.7.11
-        env:
-          EMAIL: ${{ secrets.KATALON_EMAIL }}
-          PASSWORD: ${{ secrets.KATALON_PWD }}
-          PROJECT_ID: 494065
-          TYPE: junit
-          REPORT_PATH: target/surefire-reports/
 
   sonar:
     name: Inspect - Using Sonar
