@@ -22,7 +22,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 1.8
+          java-version: 11
           distribution: 'adopt'
       - name: Cache Maven packages
         uses: actions/cache@v4
@@ -118,7 +118,7 @@ jobs:
       - name: Set up JDK 8
         uses: actions/setup-java@v4
         with:
-          java-version: 1.8
+          java-version: 11
           distribution: 'adopt'
       - name: Cache Maven packages
         uses: actions/cache@v4
@@ -295,7 +295,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 1.8
+          java-version: 11
           distribution: 'adopt'
       - name: Set up Maven
         run: mvn -N io.takari:maven:wrapper -Dmaven=3.8.2
@@ -415,7 +415,7 @@ jobs:
       - name: Set up JDK 8
         uses: actions/setup-java@v4
         with:
-          java-version: 1.8
+          java-version: 11
           distribution: 'adopt'
       - name: Cache Maven packages
         uses: actions/cache@v4
@@ -451,7 +451,7 @@ jobs:
       - name: Set up JDK 8
         uses: actions/setup-java@v4
         with:
-          java-version: 1.8
+          java-version: 11
           distribution: 'adopt'
       - name: Cache Maven packages
         uses: actions/cache@v1
@@ -478,7 +478,7 @@ jobs:
       - name: Set up JDK 8
         uses: actions/setup-java@v4
         with:
-          java-version: 1.8
+          java-version: 11
           distribution: 'adopt'
       - name: Cache Maven packages
         uses: actions/cache@v4
@@ -516,7 +516,7 @@ jobs:
       - name: Set up JDK 8
         uses: actions/setup-java@v4
         with:
-          java-version: 1.8
+          java-version: 11
           distribution: 'adopt'
       - name: Cache Maven packages
         uses: actions/cache@v4
@@ -542,7 +542,7 @@ jobs:
       - name: Set up JDK 8
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 11
       - name: Cache Maven packages
         uses: actions/cache@v1
         with:
@@ -583,7 +583,7 @@ jobs:
       - name: Set up JDK 8
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 11
       - name: Cache Maven packages
         uses: actions/cache@v1
         with:
@@ -628,7 +628,7 @@ jobs:
       - name: Set up JDK 8
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 11
       - name: Cache Maven packages
         uses: actions/cache@v1
         with:
@@ -721,7 +721,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 11
       - name: Cache Maven packages
         uses: actions/cache@v1
         with:
@@ -771,7 +771,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 11
       - name: Cache Maven packages
         uses: actions/cache@v1
         with:
@@ -808,7 +808,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 11
       - name: Cache Maven packages
         uses: actions/cache@v1
         with:
@@ -979,7 +979,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 11
       - name: Cache Maven packages
         uses: actions/cache@v1
         with:
@@ -1212,7 +1212,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 11
       - name: Cache Maven packages
         uses: actions/cache@v1
         with:
