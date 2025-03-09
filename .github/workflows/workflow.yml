@@ -6,7 +6,7 @@ on:
       - opened
     branches:
       - 'releases/**'
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
 
