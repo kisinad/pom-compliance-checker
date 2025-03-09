@@ -46,15 +46,15 @@ jobs:
         with:
           name: jacoco-report
           path: target/site/jacoco/
-      - name: Adding Junit Report
-        uses: ashley-taylor/junit-report-annotations-action@master
-        if: always()
-        with:
-          access-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action/composite@v1
-        with:
-          files: target/surefire-reports/*.xml
+#      - name: Adding Junit Report
+#        uses: ashley-taylor/junit-report-annotations-action@master
+#        if: always()
+#        with:
+#          access-token: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Publish Unit Test Results
+#        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+#        with:
+#          files: target/surefire-reports/*.xml
 
   sonar:
     name: Inspect - Using Sonar
